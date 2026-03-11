@@ -1,6 +1,0 @@
-{
-  "extends": ["love"],
-  "parserOptions": {
-    "project": ["./tsconfig.json"]
-  }
-}
