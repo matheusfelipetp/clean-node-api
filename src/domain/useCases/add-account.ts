@@ -11,4 +11,3 @@ interface AddAccount {
 }
 
 export { AddAccount, AddAccountModel };
-
