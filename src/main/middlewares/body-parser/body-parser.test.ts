@@ -1,5 +1,5 @@
 import request from "supertest";
-import app from "../config/app";
+import app from "../../config/app";
 
 describe("Body Parser Middleware", () => {
   test("Should parse body as JSON", async () => {
@@ -7,7 +7,7 @@ describe("Body Parser Middleware", () => {
 
     await request(app)
       .post("/test_body_parser")
-      .send({ name: "Matheus" })
-      .expect({ name: "Matheus" });
+      .send({ name: "any_name" })
+      .expect({ name: "any_name" });
   });
 });
