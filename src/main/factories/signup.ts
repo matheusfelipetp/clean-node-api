@@ -2,9 +2,11 @@ import { DbAddAccount } from "../../data/useCases/add-account/db-add-account";
 import { BcryptAdapter } from "../../infra/criptography/bcrypt-adapter";
 import { AccountMongoRepository } from "../../infra/db/mongodb/account-repository/account";
 import { SignUpController } from "../../presentation/controllers/signup/signup";
+import { Controller } from "../../presentation/protocols";
 import { EmailValidatorAdapter } from "../../utils/email-validator";
+import { LogControllerDecorator } from "../decorators/log/log";
 
-export const makeSignUpController = (): SignUpController => {
+export const makeSignUpController = (): Controller => {
   const emailValidatorAdapter = new EmailValidatorAdapter();
   const salt = 12;
   const bcryptAdapter = new BcryptAdapter(salt);
@@ -16,5 +18,5 @@ export const makeSignUpController = (): SignUpController => {
     dbAddAccount,
   );
 
-  return signUpController;
+  return new LogControllerDecorator(signUpController);
 };
