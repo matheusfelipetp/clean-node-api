@@ -49,16 +49,16 @@ A arquitetura impõe que nenhuma camada interna dependa de camadas externas. O f
 
 ```
 ┌─────────────────────────────────────────────────┐
-│  main (Factories, Routes, Config, Server)        │ ← Composição
+│  main (Factories, Routes, Config, Server)       │ ← Composição
 ├─────────────────────────────────────────────────┤
-│  presentation (Controllers, Helpers, Errors)     │ ← HTTP
+│  presentation (Controllers, Helpers, Errors)    │ ← HTTP
 ├─────────────────────────────────────────────────┤
-│  data (Use Cases, Protocols de dados)            │ ← Regras de aplicação
+│  data (Use Cases, Protocols de dados)           │ ← Regras de aplicação
 ├─────────────────────────────────────────────────┤
-│  domain (Models, Interfaces de Use Cases)        │ ← Regras de negócio puras
+│  domain (Models, Interfaces de Use Cases)       │ ← Regras de negócio puras
 ├─────────────────────────────────────────────────┤
-│  infra (MongoDB, Bcrypt, Adapters)               │ ← Implementações externas
-│  utils (Adapters de libs externas)               │
+│  infra (MongoDB, Bcrypt, Adapters)              │ ← Implementações externas
+│  utils (Adapters de libs externas)              │
 └─────────────────────────────────────────────────┘
 ```
 
@@ -328,7 +328,6 @@ PORT=5050
 | `test:integration` | `jest --watch -c jest-integration-config.js` | Testes de integração em modo watch |
 | `test:ci` | `jest --coverage` | Testes com relatório de cobertura |
 | `test:staged` | `jest --findRelatedTests` | Testes relacionados aos arquivos staged (usado pelo husky) |
-| `docs` | `node scripts/generate-docs.js` | Atualiza o README com dependências e rotas |
 
 ### Git Hooks (Husky)
 
