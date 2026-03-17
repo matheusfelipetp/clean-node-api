@@ -1,2 +1,11 @@
-node scripts/generate-docs.js
-git commit --amend --no-edit --no-verify
+LOCK_FILE=".git/DOCS_AMEND_LOCK"
+
+# Se o lock existir, estamos dentro de um amend — sair sem fazer nada
+if [ -f "$LOCK_FILE" ]; then
+  exit 0
+fi
+
+# Criar lock, rodar script + amend, remover lock
+touch "$LOCK_FILE"
+node scripts/generate-docs.js && git commit --amend --no-edit --no-verify
+rm -f "$LOCK_FILE"
