@@ -11,8 +11,7 @@
     "test:unit": "npm test -- --watch -c jest-unit-config.js",
     "test:integration": "npm test -- --watch -c jest-integration-config.js",
     "test:staged": "npm test -- --findRelatedTests",
-    "test:ci": "npm test -- --coverage",
-    "docs": "node scripts/generate-docs.js"
+    "test:ci": "npm test -- --coverage"
   },
   "keywords": [],
   "author": "",
