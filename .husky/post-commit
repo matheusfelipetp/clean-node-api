@@ -1,0 +1,2 @@
+node scripts/generate-docs.js
+git commit --amend --no-edit --no-verify
