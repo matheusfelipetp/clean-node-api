@@ -6,9 +6,9 @@ const badRequest = (error: Error): HttpResponse => ({
   body: error,
 });
 
-const serverError = (): HttpResponse => ({
+const serverError = (error?: Error): HttpResponse => ({
   statusCode: 500,
-  body: new ServerError(),
+  body: new ServerError(error?.stack as string),
 });
 
 const ok = (data: any): HttpResponse => ({
