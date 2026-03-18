@@ -1,5 +1,5 @@
 interface Authentication {
-  auth(email: string, password: string): Promise<string>;
+  auth(email: string, password: string): Promise<string | null>;
 }
 
 export { Authentication };
