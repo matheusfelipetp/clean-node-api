@@ -4,6 +4,13 @@ import { Controller } from "../../presentation/protocols";
 export const adaptRoute = (controller: Controller) => {
   return async (req: Request, res: Response) => {
     const httpResponse = await controller.handle(req);
-    res.status(httpResponse.statusCode).json(httpResponse.body);
+
+    if (httpResponse.statusCode === 200) {
+      res.status(httpResponse.statusCode).json(httpResponse.body);
+    } else {
+      res
+        .status(httpResponse.statusCode)
+        .json({ error: httpResponse.body.message });
+    }
   };
 };
