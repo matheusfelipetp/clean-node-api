@@ -11,12 +11,14 @@ import {
   AddAccountModel,
   EmailValidator,
   HttpRequest,
+  Validation,
 } from "./signup-protocols";
 
 interface SutTypes {
   sut: SignUpController;
   emailValidatorStub: EmailValidator;
   addAccountStub: AddAccount;
+  validationStub: Validation;
 }
 
 const makeFakeAccount = (): AccountModel => ({
@@ -55,12 +57,28 @@ const makeAddAccount = (): AddAccount => {
   return new AddAccountStub();
 };
 
+const makeValidation = (): Validation => {
+  class ValidationStub implements Validation {
+    validate(input: any): Error | null {
+      return null;
+    }
+  }
+
+  return new ValidationStub();
+};
+
 const makeSut = (): SutTypes => {
   const emailValidatorStub = makeEmailValidator();
   const addAccountStub = makeAddAccount();
-  const sut = new SignUpController(emailValidatorStub, addAccountStub);
+  const validationStub = makeValidation();
 
-  return { emailValidatorStub, sut, addAccountStub };
+  const sut = new SignUpController(
+    emailValidatorStub,
+    addAccountStub,
+    validationStub,
+  );
+
+  return { emailValidatorStub, sut, addAccountStub, validationStub };
 };
 
 describe("SignUp Controller", () => {
@@ -179,5 +197,19 @@ describe("SignUp Controller", () => {
     const { sut } = makeSut();
     const httpResponse = await sut.handle(makeFakeRequest());
     expect(httpResponse).toEqual(ok(makeFakeAccount()));
+  });
+
+  test("Should call Validation with correct values", async () => {
+    const { sut, validationStub } = makeSut();
+    const validateSpy = jest.spyOn(validationStub, "validate");
+    await sut.handle(makeFakeRequest());
+    expect(validateSpy).toHaveBeenCalledWith(makeFakeRequest().body);
+  });
+
+  test("Should return 400 if Validation returns an error", async () => {
+    const { sut, validationStub } = makeSut();
+    jest.spyOn(validationStub, "validate").mockReturnValueOnce(new MissingParamError("any_field"));
+    const httpResponse = await sut.handle(makeFakeRequest());
+    expect(httpResponse).toEqual(badRequest(new MissingParamError("any_field")));
   });
 });
