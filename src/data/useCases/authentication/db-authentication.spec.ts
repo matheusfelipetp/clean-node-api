@@ -91,4 +91,26 @@ describe("DBAuthentication UseCase", () => {
       makeFakeAccount().password,
     );
   });
+
+  test("Should throw if HashComparer throws", async () => {
+    const { sut, hashComparerStub } = makeSut();
+
+    jest
+      .spyOn(hashComparerStub, "compare")
+      .mockReturnValueOnce(new Promise((_, reject) => reject(new Error())));
+
+    const promise = sut.auth(makeFakeAuthentication());
+    await expect(promise).rejects.toThrow();
+  });
+
+  test("Should return null if HashComparer returns null", async () => {
+    const { sut, loadAccountByEmailRepositoryStub } = makeSut();
+
+    jest
+      .spyOn(loadAccountByEmailRepositoryStub, "load")
+      .mockReturnValueOnce(new Promise((resolve) => resolve(null)));
+
+    const accessToken = await sut.auth(makeFakeAuthentication());
+    expect(accessToken).toBeNull();
+  });
 });
