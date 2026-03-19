@@ -39,12 +39,7 @@ describe("DBAuthentication UseCase", () => {
   test("Should call LoadAccountByEmailRepository with correct email", async () => {
     const { sut, loadAccountByEmailRepositoryStub } = makeSut();
     const loadSpy = jest.spyOn(loadAccountByEmailRepositoryStub, "load");
-
-    await sut.auth({
-      email: "any_email@mail.com",
-      password: "any_password",
-    });
-
-    expect(loadSpy).toHaveBeenCalledWith("any_email@mail.com");
+    await sut.auth(makeFakeAuthentication());
+    expect(loadSpy).toHaveBeenCalledWith(makeFakeAuthentication().email);
   });
 });
