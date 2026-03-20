@@ -3,7 +3,7 @@ import globals from "globals";
 
 export default [
   {
-    ignores: ["node_modules/**", "dist/**", "coverage/**", "data/**"],
+    ignores: ["node_modules/**", "dist/**", "coverage/**", "data/**", ".vscode/**"],
   },
   {
     ...love,
