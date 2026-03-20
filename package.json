@@ -7,8 +7,6 @@
     "start": "node dist/main/server.js",
     "dev": "sucrase-node src/main/server.ts",
     "build": "rimraf dist && tsc",
-    "up": "npm run build && docker-compose up -d",
-    "down": "docker-compose down",
     "prepare": "husky",
     "test": "jest --passWithNoTests --silent --noStackTrace --runInBand",
     "test:verbose": "jest --passWithNoTests --runInBand",
