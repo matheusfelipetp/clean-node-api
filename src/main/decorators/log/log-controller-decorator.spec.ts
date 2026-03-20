@@ -1,12 +1,15 @@
-import { LogErrorRepository } from "../../../data/protocols/db/log-error-repository";
+import { LogErrorRepository } from "../../../data/protocols/db/log/log-error-repository";
 import { AccountModel } from "../../../domain/models/account";
-import { ok, serverError } from "../../../presentation/helpers/http/http-helper";
+import {
+  ok,
+  serverError,
+} from "../../../presentation/helpers/http/http-helper";
 import {
   Controller,
   HttpRequest,
   HttpResponse,
 } from "../../../presentation/protocols";
-import { LogControllerDecorator } from "./log";
+import { LogControllerDecorator } from "./log-controller-decorator";
 
 interface SutTypes {
   sut: LogControllerDecorator;
@@ -34,7 +37,7 @@ const makeFakeServerError = (): HttpResponse => {
   const fakeError = new Error();
   fakeError.stack = "any_stack";
   return serverError(fakeError);
-}
+};
 
 const makeLogErrorRepository = (): LogErrorRepository => {
   class LogErrorRepositoryStub implements LogErrorRepository {
