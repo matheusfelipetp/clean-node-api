@@ -3,16 +3,16 @@ import {
   ok,
   serverError,
   unauthorized,
-} from "../../helpers/http/http-helper";
+} from "../../../helpers/http/http-helper";
 import {
   Authentication,
   Controller,
   HttpRequest,
   HttpResponse,
   Validation,
-} from "./login-controller-protocols";
+} from "./signin-controller-protocols";
 
-export class LoginController implements Controller {
+export class SignInController implements Controller {
   constructor(
     private readonly authentication: Authentication,
     private readonly validation: Validation,

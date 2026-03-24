@@ -1,20 +1,20 @@
-import { MissingParamError, ServerError } from "../../errors";
+import { MissingParamError, ServerError } from "../../../errors";
 import {
   badRequest,
   ok,
   serverError,
   unauthorized,
-} from "../../helpers/http/http-helper";
-import { LoginController } from "./login-controller";
+} from "../../../helpers/http/http-helper";
+import { SignInController } from "./signin-controller";
 import {
   Authentication,
   AuthenticationModel,
   HttpRequest,
   Validation,
-} from "./login-controller-protocols";
+} from "./signin-controller-protocols";
 
 interface SutTypes {
-  sut: LoginController;
+  sut: SignInController;
   authenticationStub: Authentication;
   validationStub: Validation;
 }
@@ -49,11 +49,11 @@ const makeValidation = (): Validation => {
 const makeSut = (): SutTypes => {
   const authenticationStub = makeAuthentication();
   const validationStub = makeValidation();
-  const sut = new LoginController(authenticationStub, validationStub);
+  const sut = new SignInController(authenticationStub, validationStub);
   return { sut, authenticationStub, validationStub };
 };
 
-describe("Login Controller", () => {
+describe("SignIn Controller", () => {
   test("Should call Authentication with correct values", async () => {
     const { sut, authenticationStub } = makeSut();
     const isAuthSpy = jest.spyOn(authenticationStub, "auth");

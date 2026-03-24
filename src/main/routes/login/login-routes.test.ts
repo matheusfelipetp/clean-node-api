@@ -35,8 +35,8 @@ describe("Login Routes", () => {
     });
   });
 
-  describe("POST /login", () => {
-    test("Should return 200 on login", async () => {
+  describe("POST /signin", () => {
+    test("Should return 200 on signin", async () => {
       const password = await hash("any_password", 12);
 
       await accountCollection.insertOne({
@@ -46,7 +46,7 @@ describe("Login Routes", () => {
       });
 
       await request(app)
-        .post("/api/login")
+        .post("/api/signin")
         .send({
           email: "any_email@mail.com",
           password: "any_password",
@@ -54,9 +54,9 @@ describe("Login Routes", () => {
         .expect(200);
     });
 
-    test("Should return 401 on login", async () => {
+    test("Should return 401 on signin", async () => {
       await request(app)
-        .post("/api/login")
+        .post("/api/signin")
         .send({
           email: "any_email@mail.com",
           password: "any_password",
