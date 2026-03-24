@@ -7,7 +7,7 @@ export default [
       "node_modules/**",
       "dist/**",
       "coverage/**",
-      "data/**",
+      "./data/**",
       ".vscode/**",
     ],
   },
