@@ -1,3 +1,6 @@
 {
-  "*.ts": ["eslint --fix", "jest --bail --passWithNoTests --findRelatedTests"]
+  "*.ts": [
+    "eslint 'src/**' --fix",
+    "jest --bail --passWithNoTests --findRelatedTests"
+  ]
 }

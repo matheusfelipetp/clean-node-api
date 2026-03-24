@@ -3,7 +3,13 @@ import globals from "globals";
 
 export default [
   {
-    ignores: ["node_modules/**", "dist/**", "coverage/**", "data/**", ".vscode/**"],
+    ignores: [
+      "node_modules/**",
+      "dist/**",
+      "coverage/**",
+      "data/**",
+      ".vscode/**",
+    ],
   },
   {
     ...love,
@@ -14,6 +20,11 @@ export default [
         ...(love.languageOptions?.globals ?? {}),
         ...globals.node,
         ...globals.browser,
+      },
+      parserOptions: {
+        projectService: {
+          allowDefaultProject: ["jest.config.ts"],
+        },
       },
     },
     rules: {
