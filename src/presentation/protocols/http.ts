@@ -5,6 +5,7 @@ interface HttpResponse {
 
 interface HttpRequest {
   body?: any;
+  headers?: any;
 }
 
 export { HttpRequest, HttpResponse };
