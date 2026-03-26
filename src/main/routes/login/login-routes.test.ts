@@ -26,10 +26,10 @@ describe("Login Routes", () => {
       await request(app)
         .post("/api/signup")
         .send({
-          name: "any_name",
-          email: "any_email@mail.com",
-          password: "any_password",
-          passwordConfirmation: "any_password",
+          name: "Matheus",
+          email: "matheus@mail.com",
+          password: "123456",
+          passwordConfirmation: "123456",
         })
         .expect(200);
     });
@@ -37,19 +37,19 @@ describe("Login Routes", () => {
 
   describe("POST /signin", () => {
     test("Should return 200 on signin", async () => {
-      const password = await hash("any_password", 12);
+      const password = await hash("123456", 12);
 
       await accountCollection.insertOne({
-        name: "any_name",
-        email: "any_email@mail.com",
+        name: "Matheus",
+        email: "matheus@mail.com",
         password: password,
       });
 
       await request(app)
         .post("/api/signin")
         .send({
-          email: "any_email@mail.com",
-          password: "any_password",
+          email: "matheus@mail.com",
+          password: "123456",
         })
         .expect(200);
     });
@@ -58,8 +58,8 @@ describe("Login Routes", () => {
       await request(app)
         .post("/api/signin")
         .send({
-          email: "any_email@mail.com",
-          password: "any_password",
+          email: "matheus@mail.com",
+          password: "123456",
         })
         .expect(401);
     });
