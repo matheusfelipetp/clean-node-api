@@ -1,5 +1,4 @@
 import { ObjectId } from "mongodb";
-
 import { AddAccountRepository } from "../../../../data/protocols/db/account/add-account-repository";
 import { LoadAccountByEmailRepository } from "../../../../data/protocols/db/account/load-account-by-email-repository";
 import { LoadAccountByTokenRepository } from "../../../../data/protocols/db/account/load-account-by-token-repository";
@@ -41,7 +40,7 @@ export class AccountMongoRepository
 
     const account = await accountCollection.findOne({
       accessToken,
-      role,
+      $or: [{ role }, { role: "admin" }],
     });
 
     return account && MongoHelper.map(account);
